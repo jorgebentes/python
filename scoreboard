@@ -1,0 +1,18 @@
+#!/usr/bin/env python3.6
+
+scoreboard = [300, 5, 200, 9.2, 3, 5, 6, 2, 1.4, 0, 7, 250]
+output = dict()
+
+def order(scoreboard1):
+    output["Last inserted: "] = scoreboard1[-1]
+    sorted_scoreboard = sorted(scoreboard1, reverse=True)
+    output["First: "] = sorted_scoreboard[0]
+    output["Second: "] = sorted_scoreboard[1]
+    output["Third: "] = sorted_scoreboard[2]
+
+def main():
+    order(scoreboard)
+    for element in output:
+        print(element, output[element])
+
+main()
