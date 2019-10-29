@@ -1,0 +1,58 @@
+#!/usr/bin/env python3.6
+
+import json
+
+test = 'c:\\Users\\jbentes\\Desktop\\Test1.json'
+
+def access1():
+    color_dict = {}
+    temp_dict = {}
+    with open(test) as json_file:
+        data = json.load(json_file)
+        for group in data:
+            original_color = group["color"]
+            color_dict.setdefault(original_color, 0)
+            color_dict[original_color] += 1
+        temp_dict = data.copy()
+        match_color(color_dict, temp_dict)
+
+def match_color(color_dict, temp_dict):
+    for color in color_dict:
+        for group in temp_dict:
+            if (group["color"] == color) :
+                match_range(temp_dict, color, group)
+
+def match_range(temp_dict, color, group):
+    printed = set()
+    for group1 in temp_dict:
+        print("impressos: ",printed)
+        if group1["color"] == color and (group1 != group):
+            min_ = int(group["min_version"] * 10)
+            max_ = int(group["max_version"] * 10)
+            min1 = int(group1["min_version"] * 10)
+            max1 = int(group1["max_version"] * 10)
+            if intersect(min_, max_, min1, max1):
+                if group1["name"] in printed:
+                    print(group1)
+                    group1["color"]=0
+                else:
+                    printed.add(group1["name"])
+                    print(group1)
+                    group1["color"] = 0
+        elif (group1 == group):
+            print(group)
+            printed.add(group["name"])
+            group1["color"] = 0
+
+
+def intersect(mi_, ma_, mi1, ma1):
+    for x in range (mi_,ma_):
+        for y in range (mi1, ma1):
+            if x==y:
+                return 1
+    return 0
+
+def main():
+    access1()
+
+main()
