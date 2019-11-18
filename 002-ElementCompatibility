@@ -2,7 +2,7 @@
 
 import json
 
-test = 'c:\\Users\\jbentes\\Desktop\\Test.json'
+test = 'c:\\Users\\jbentes\\Desktop\\Test1.json'
 
 def access1():
     color_dict = {}
@@ -79,6 +79,8 @@ def print_bulk(color, list_):
                 print_unique(el["name"])
 
 def main():
+    print("Used File: ")
+    print("  ", test[test.rfind("\\") + 1:test.rfind(".")])
     access1()
 
 main()
