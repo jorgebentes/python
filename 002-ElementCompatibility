@@ -38,7 +38,7 @@ def match_version(matched_color):
             if (len(matched_color) > 1):
                 min1 = int(group1["min_version"] * 10)
                 max1 = int(group1["max_version"] * 10)
-                if (intersect(min_, max_, min1, max1)==1) and (group1 not in bingo) and (group1 != group):
+                if intersect(min_, max_, min1, max1 and (group1 not in bingo) and (group1 != group):
                     bingo.append(group1["name"])
             else:
                 print_color_name(matched_color[0]["color"])
