@@ -2,7 +2,7 @@
 
 import json
 
-test = 'c:\\Users\\jbentes\\Desktop\\Test1.json'
+test = 'c:\\Users\\jbentes\\Desktop\\Test.json'
 
 def access1():
     color_dict = {}
@@ -27,7 +27,6 @@ def match_color(color_dict, temp_dict):
                 matched_color.append(group)
                 counter -= 1
         match_version(matched_color)
-        #print_matched_colors(auxcounter, matched_color)
 
 def match_version(matched_color):
     bingo = []
@@ -39,43 +38,45 @@ def match_version(matched_color):
             if (len(matched_color) > 1):
                 min1 = int(group1["min_version"] * 10)
                 max1 = int(group1["max_version"] * 10)
-                #print(min_, max_, " | " , min1, max1)
                 if (intersect(min_, max_, min1, max1)==1) and (group1 not in bingo) and (group1 != group):
                     bingo.append(group1["name"])
             else:
-                print("Unico elemento da cor!", group1["name"])
-
-    if len(bingo)>0:
-        auxcounter1= len(bingo)
-        for el in set(bingo):
-            auxcounter1 -= 1
-            if auxcounter1 > 0:
-                print(el, end=", ")
-            else:
-                print(", ", el, end=" ")
-        print(" ")
-
-        for p in matched_color:
-            if group1["name"] not in bingo:
-                print("Sem cruzar -> ", group1["name"])
-                break
+                print_color_name(matched_color[0]["color"])
+                print_unique(group1["name"])
+    print_bulk(matched_color, bingo)
 
 def intersect(mi_, ma_, mi1, ma1):
     for x in range(mi_, ma_):
         for y in range(mi1, ma1):
             if x == y:
-                #print("Bingo!")
                 return 1
     return 0
 
-def print_matched_colors(auxcounter, matched_color):
-    for group in matched_color:
-        auxcounter -= 1
-        if auxcounter > 0:
-            print(group["name"], " | ", end=" ")
-        else:
-            print(group["name"], end=" ")
-    print(" ")
+def print_color_name(color):
+    #print()
+    print("->", end=" ")
+    print(color, end=" ")
+    print("<-")
+
+def print_unique(elem):
+    print("   ", end="")
+    print(elem)
+
+def print_bulk(color, list_):
+    if len(list_)>0:
+        print_color_name(color[0]["color"])
+        auxcounter1 = len(set(list_))
+        print("   ", end="")
+        for el in set(list_):
+            if auxcounter1 > 1:
+                print(el, end=", ")
+            else:
+                print(el, end=" ")
+            auxcounter1 -= 1
+        print(" ")
+        for el in color:
+            if el["name"] not in set(list_):
+                print_unique(el["name"])
 
 def main():
     access1()
