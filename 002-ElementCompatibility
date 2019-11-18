@@ -29,7 +29,7 @@ def match_color(color_dict, temp_dict):
         match_version(matched_color)
 
 def match_version(matched_color):
-    bingo = []
+    output = []
     for i in range(len(matched_color)):
         group = matched_color[i]
         min_ = int(group["min_version"] * 10)
@@ -38,12 +38,12 @@ def match_version(matched_color):
             if (len(matched_color) > 1):
                 min1 = int(group1["min_version"] * 10)
                 max1 = int(group1["max_version"] * 10)
-                if intersect(min_, max_, min1, max1) and (group1 not in bingo) and (group1 != group):
-                    bingo.append(group1["name"])
+                if intersect(min_, max_, min1, max1) and (group1 not in output) and (group1 != group):
+                    output.append(group1["name"])
             else:
                 print_color_name(matched_color[0]["color"])
                 print_unique(group1["name"])
-    print_bulk(matched_color, bingo)
+    print_bulk(matched_color, output)
 
 def intersect(mi_, ma_, mi1, ma1):
     for x in range(mi_, ma_):
